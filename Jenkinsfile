@@ -34,7 +34,6 @@ pipeline {
 
         stage('Post-Build / Deploy') {
             steps {
-                // Optional: copy files to a staging folder or server
                 echo 'Post-Build Step: Ready for deployment or archiving'
             }
         }

@@ -18,18 +18,19 @@ pipeline {
         }
 
         stage('Test') {
-            steps {
-                // Simple test: check if index.html exists
-                bat '''
-                if exist index.html (
-                    echo index.html exists - test passed
-                ) else (
-                    echo index.html missing - test failed
-                    exit /b 1
-                )
-                '''
-            }
-        }
+    steps {
+        bat '''
+        cd project-1
+        if exist index.html (
+            echo index.html exists - test passed
+        ) else (
+            echo index.html missing - test failed
+            exit /b 1
+        )
+        '''
+    }
+}
+
 
         stage('Post-Build / Deploy') {
             steps {

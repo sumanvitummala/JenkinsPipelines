@@ -1,5 +1,5 @@
 pipeline {
-    agent any  // run on any available Jenkins agent
+    agent any  // Run on any available Jenkins agent
 
     stages {
         stage('Checkout') {
@@ -11,22 +11,22 @@ pipeline {
 
         stage('Build') {
             steps {
-                // For HTML, there is usually no compilation, just verify files
+                // HTML doesn't require compilation, just verify files
                 echo 'Build Step: HTML project does not require compilation'
-                sh 'ls -l'  // list project files to verify checkout
+                bat 'dir'  // List files in workspace
             }
         }
 
         stage('Test') {
             steps {
                 // Simple test: check if index.html exists
-                sh '''
-                if [ -f index.html ]; then
-                    echo "index.html exists - test passed"
-                else
-                    echo "index.html missing - test failed"
-                    exit 1
-                fi
+                bat '''
+                if exist index.html (
+                    echo index.html exists - test passed
+                ) else (
+                    echo index.html missing - test failed
+                    exit /b 1
+                )
                 '''
             }
         }
@@ -48,4 +48,3 @@ pipeline {
         }
     }
 }
-
